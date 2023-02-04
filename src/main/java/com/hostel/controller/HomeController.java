@@ -24,4 +24,13 @@ public class HomeController {
     public String notFound() {
         return "404.html";
     }
+
+    @GetMapping("/indexWarden")
+    public String indexWarden(){
+        return "warden";
+    }
+    @GetMapping("/indexHostel")
+    public String indexHostel(){
+        return "hostel";
+    }
 }

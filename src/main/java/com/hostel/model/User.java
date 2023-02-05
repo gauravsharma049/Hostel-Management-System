@@ -27,6 +27,7 @@ public class User {
     private String name;
     private String mobile;
     private String email;
+    private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Role> roles;
 

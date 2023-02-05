@@ -36,4 +36,7 @@ public class HomeController {
     public String indexHostel(){
         return "hostel";
     }
+    public String nothing(){
+        return "notfound";
+    }
 }

@@ -4,6 +4,9 @@ import com.hostel.dto.UserDto;
 import com.hostel.model.User;
 import com.hostel.repository.UserRepository;
 import com.hostel.service.UserService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,23 +14,25 @@ import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public User save(UserDto userDto) {
-        try {
+//        try {
             User user = new User();
             user.setName(userDto.getName());
             user.setMobile(userDto.getMobile());
             user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             user.setRoles(userDto.getRoles());
             return userRepository.save(user);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            return null;
+//        }
     }
 
     @Override

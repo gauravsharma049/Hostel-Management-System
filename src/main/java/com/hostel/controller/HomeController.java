@@ -36,5 +36,4 @@ public class HomeController {
     public String indexHostel(){
         return "hostel";
     }
-
 }

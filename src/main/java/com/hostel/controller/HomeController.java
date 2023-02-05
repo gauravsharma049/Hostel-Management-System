@@ -36,4 +36,9 @@ public class HomeController {
     public String indexHostel(){
         return "hostel";
     }
+
+    public String returna(){
+        System.out.println("hello");
+        return null;
+    }
 }

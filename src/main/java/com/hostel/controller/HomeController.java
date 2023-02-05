@@ -37,8 +37,4 @@ public class HomeController {
         return "hostel";
     }
 
-    public String returna(){
-        System.out.println();
-        return "abck";
-    }
 }

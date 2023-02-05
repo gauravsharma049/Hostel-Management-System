@@ -24,7 +24,10 @@ public class HomeController {
     public String notFound() {
         return "404.html";
     }
-
+    @GetMapping("/forgotten-password")
+    public String forgotPassword(){
+        return "forgot-password";
+    }
     @GetMapping("/indexWarden")
     public String indexWarden(){
         return "warden";

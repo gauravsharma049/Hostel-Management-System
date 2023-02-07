@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(UserDto userDto) {
-//        try {
             User user = new User();
             user.setName(userDto.getName());
             user.setMobile(userDto.getMobile());
@@ -29,25 +28,16 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
             user.setRoles(userDto.getRoles());
             return userRepository.save(user);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return null;
-//        }
     }
 
     @Override
     public User update(UserDto userDto) {
-        try {
-            User user =userRepository.findById(userDto.getUserId()).get();
-            user.setName(userDto.getName());
-            user.setMobile(userDto.getMobile());
-            user.setEmail(userDto.getEmail());
-            user.setPassword(userDto.getPassword());
-            return userRepository.save(user);
-        }catch (Exception e){
-            e.printStackTrace();
-            return null;
-        }
+        User user =userRepository.findById(userDto.getUserId()).get();
+        user.setName(userDto.getName());
+        user.setMobile(userDto.getMobile());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(userDto.getPassword());
+        return userRepository.save(user);
     }
 
     @Override
@@ -67,12 +57,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(int id) {
-        try {
-            User user = userRepository.findById(id).get();
-            userRepository.delete(user);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        User user = userRepository.findById(id).get();
+        userRepository.delete(user);
     }
 
 }

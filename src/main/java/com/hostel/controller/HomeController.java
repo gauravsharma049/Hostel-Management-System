@@ -48,13 +48,12 @@ public class HomeController {
     public String indexWarden(){
         return "warden";
     }
-    @GetMapping("/indexHostel")
-    public String indexHostel(){
-        return "hostel";
-    }
 
     @PostMapping("/register")
-    public String SignUp(@Valid @ModelAttribute("user") UserDto userDto, BindingResult bindingResult, Model model, HttpSession session){
+    public String SignUp(@Valid @ModelAttribute("user") UserDto userDto,
+                         BindingResult bindingResult,
+                         Model model,
+                         HttpSession session){
         if(bindingResult.hasErrors()){
             System.out.println(bindingResult.getErrorCount());
             System.out.println(bindingResult.getAllErrors());

@@ -5,9 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -15,6 +13,8 @@ import javax.persistence.OneToOne;
 @AllArgsConstructor
 @Entity
 public class Warden {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int wardenId;
     private String name;
     private String phone;

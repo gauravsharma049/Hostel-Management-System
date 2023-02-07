@@ -18,19 +18,31 @@
     <div class="container-fluid">
 
       <!-- Page Heading -->
-      <h1>Manage Hostel</h1>
+
+      <div th:if="${success}" class="text-center alert alert-success">
+        <p th:text="${success}"></p>
+      </div>
+      <div th:if="${failed}" class="mt-1 text-center alert alert-danger">
+        <p th:text="${failed}"></p>
+      </div>
 
       <!-- DataTales Example -->
       <div class="card shadow mb-4">
         <div class="card-header py-3">
           <h6 class="m-0 font-weight-bold text-primary">Manage Hostel</h6>
+          <div class="mt-2" th:if="${size==0}">
+            <p>No Hostel Found</p>
+          </div>
+          <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-1"><i
+                  class="fas fa-sm text-white-50"></i> Add Hostel</a>
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table th:if="${size>0}" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
               <tr>
                 <th>Hostel ID</th>
+                <th>Hostel Name</th>
                 <th>Hostel Type</th>
                 <th>No. of Room</th>
                 <th>Address</th>
@@ -39,12 +51,13 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>HOS001</td>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
+              <tr th:each="hostel : ${hostels}">
+                <td th:text="${hostel.hostelId}"></td>
+                <td th:text="${hostel.name}"></td>
+                <td th:text="${hostel.type}"></td>
+                <td th:text="${hostel.noOfRoom}"></td>
+                <td th:text="${hostel.address}"></td>
+                <td th:text="${hostel.annualExp}"></td>
                 <td>
                   <a href="#" class="btn btn-warning btn-circle btn-sm">
                     <i class="fas fa-info-circle"></i>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+<div class="content">
+    <!-- Content Row -->
+    <div class="row">
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+            <!-- Page Heading -->
+
+            <!-- DataTales Example -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Add Hostel</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <form class="form-horizontal" th:action="@{/save-hostel}" method="post"
+                              enctype="multipart/form-data" th:object="${hostel}">
+                            <fieldset>
+                                <!-- Form Name -->
+                                <legend>ADD Hostel</legend>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="name">HOSTEL NAME</label>
+                                    <div class="col-md-4">
+                                        <input id="name" th:value="${hostel.name}" name="name"
+                                               class="form-control input-md" type="text" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''">
+                                        <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}" th:text="${error}"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="hostel_type">HOSTEL TYPE</label>
+                                    <div class="col-md-4">
+                                        <input id="hostel_type" th:field="*{type}" name="hostel_type"
+                                               class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="no_of_rooms">NO OF ROOMS</label>
+                                    <div class="col-md-4">
+                                        <input id="no_of_rooms" th:field="*{noOfRoom}" name="no_of_rooms"
+                                               class="form-control input-md" type="text">
+
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="address">ADDRESS</label>
+                                    <div class="col-md-4">
+                                        <input id="address" th:field="*{address}" name="address"
+                                               class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label" for="annual_exp">ANNUAL EXP</label>
+                                    <div class="col-md-4">
+                                        <input id="annual_exp" th:field="*{annualExp}" name="annual_exp"
+                                               class="form-control input-md" type="text">
+                                    </div>
+                                </div>
+
+                            </fieldset>
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+</body>
+
+</html>

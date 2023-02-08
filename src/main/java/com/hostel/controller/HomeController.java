@@ -70,7 +70,7 @@ public class HomeController {
 
         }
         catch(DataIntegrityViolationException e){
-            session.setAttribute("message", new Message("user with email id "+userDto.getEmail() + " already exixts..", "alert-warning"));
+            session.setAttribute("message", new Message("user with email id "+userDto.getEmail() + " already exists..", "alert-warning"));
             return "register";
         }
         catch(Exception e){

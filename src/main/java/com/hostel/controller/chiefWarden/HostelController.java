@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -22,27 +20,27 @@ public class HostelController {
     private HostelService hostelService;
 
     @GetMapping("/hostel")
-    public String hostel(Model model){
+    public String hostel(Model model) {
         List<Hostel> hostels = hostelService.findAllHostel();
-        model.addAttribute("hostels",hostels);
-        model.addAttribute("size",hostels.size());
-        model.addAttribute("title","Manage Hostel");
+        model.addAttribute("hostels", hostels);
+        model.addAttribute("size", hostels.size());
+        model.addAttribute("title", "Manage Hostel");
         return "hostel";
     }
 
     @GetMapping("/add-hostel")
-    public String addForm(Model model){
-        model.addAttribute("title","Add-Hostel");
-        model.addAttribute("hostel",new Hostel());
+    public String addForm(Model model) {
+        model.addAttribute("title", "Add-Hostel");
+        model.addAttribute("hostel", new Hostel());
         return "add-hostel";
     }
 
     @PostMapping("/save-hostel")
-    public String addHostel(@Valid @ModelAttribute("hostel")Hostel hostel,
+    public String addHostel(@Valid @ModelAttribute("hostel") Hostel hostel,
                             BindingResult bindingResult,
                             HttpSession session,
-                            RedirectAttributes attributes){
-        if(bindingResult.hasErrors()){
+                            RedirectAttributes attributes) {
+        if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getErrorCount());
             System.out.println(bindingResult.getAllErrors());
             session.setAttribute("message", new Message("invalid details", "alert-warning"));
@@ -50,12 +48,31 @@ public class HostelController {
         }
         try {
             hostelService.save(hostel);
-            attributes.addFlashAttribute("success","Added Successfully !");
-        }catch (Exception e){
+            attributes.addFlashAttribute("success", "Added Successfully !");
+        } catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed","Failed");
+            attributes.addFlashAttribute("failed", "Failed");
         }
         return "redirect:/hostel";
     }
 
+    @GetMapping("/update-hostel/{id}")
+    public String updateForm(@PathVariable("id")int id, Model model){
+        Hostel hostel = hostelService.findById(id);
+        model.addAttribute("hostel",hostel);
+        model.addAttribute("title","Update form");
+        return "update-hostel";
+    }
+
+    @GetMapping("/delete-hostel/{id}")
+    public String deleteHostel(@PathVariable("id") int id, Model model, RedirectAttributes attributes) {
+        try {
+            hostelService.delete(id);
+            attributes.addFlashAttribute("success", "Deleted Successfully !");
+        } catch (Exception e) {
+            e.printStackTrace();
+            attributes.addFlashAttribute("failed", "Failed");
+        }
+        return "redirect:/hostel";
+    }
 }

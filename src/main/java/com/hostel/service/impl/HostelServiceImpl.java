@@ -31,6 +31,11 @@ public class HostelServiceImpl implements HostelService {
     }
 
     @Override
+    public Hostel findById(int id) {
+        return hostelRepository.findById(id).get();
+    }
+
+    @Override
     public List<Hostel> findAllHostel() {
         return hostelRepository.findAll();
     }

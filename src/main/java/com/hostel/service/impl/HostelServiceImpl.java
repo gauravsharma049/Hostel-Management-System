@@ -20,8 +20,8 @@ public class HostelServiceImpl implements HostelService {
 
     @Override
     public Hostel update(Hostel hostel) {
-        Hostel hostelUpdate = null;
-        hostelUpdate = hostelRepository.findById(hostel.getHostelId()).get();
+        Hostel hostelUpdate = hostelRepository.findById(hostel.getHostelId()).get();
+        hostelUpdate.setHostelId(hostelUpdate.getHostelId());
         hostelUpdate.setName(hostel.getName());
         hostelUpdate.setType(hostel.getType());
         hostelUpdate.setNoOfRoom(hostel.getNoOfRoom());

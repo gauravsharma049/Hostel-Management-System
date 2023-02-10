@@ -64,6 +64,21 @@ public class HostelController {
         return "update-hostel";
     }
 
+    @PostMapping("/update-hostel/{id}")
+    public String updateProcess(@PathVariable("id")int id,
+                                @ModelAttribute("hostel")Hostel hostel,
+                                RedirectAttributes attributes){
+        try {
+            hostel.setHostelId(id);
+            hostelService.update(hostel);
+            attributes.addFlashAttribute("success","Updated Successfully !");
+        }catch (Exception e){
+            e.printStackTrace();
+            attributes.addFlashAttribute("failed","Failed !");
+        }
+        return "redirect:/hostel";
+    }
+
     @GetMapping("/delete-hostel/{id}")
     public String deleteHostel(@PathVariable("id") int id, Model model, RedirectAttributes attributes) {
         try {
@@ -71,7 +86,7 @@ public class HostelController {
             attributes.addFlashAttribute("success", "Deleted Successfully !");
         } catch (Exception e) {
             e.printStackTrace();
-            attributes.addFlashAttribute("failed", "Failed");
+            attributes.addFlashAttribute("failed", "Failed !");
         }
         return "redirect:/hostel";
     }

@@ -14,17 +14,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hostel.dto.UserDto;
+import com.hostel.service.impl.HostellerDetailsServiceImpl;
 import com.hostel.service.impl.UserServiceImpl;
 
 @Controller
 public class HomeController {
     @Autowired
     private UserServiceImpl userService;
+    @Autowired private HostellerDetailsServiceImpl hostellersService;
     @GetMapping("/")
     public String home() {
         return "dashboard";
     }
 
+    @GetMapping("/hostellers-details")
+    public String hostellersDetails(Model model) {
+        model.addAttribute("hostellers", hostellersService.findAllHostellerDetails());
+        return "hostellersDetails";
+    }
     @GetMapping("/login")
     public String login() {
         return "login";

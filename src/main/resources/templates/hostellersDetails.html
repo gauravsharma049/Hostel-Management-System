@@ -22,32 +22,35 @@
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Manage Warden</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Hostellers Details</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Hostel ID</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
+                                        <th>Hosteller ID</th>
+                                        <th>Name</th>
                                         <th>Phone</th>
-                                        <th>Address</th>
-                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Hostel Number</th>
+                                        <th>Room Number</th>
+                                        <th>Fees Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>HOS001</td>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
+                                    <tr th:each=" h: ${hostellers}">
+                                        <td th:text="${h.hostellerId}"></td>
+                                        <td th:text="${h.name}"></td>
+                                        <td th:text="${h.mobile}"></td>
+                                        <td th:text="${h.email}"></td>
+                                        <td th:text="${h.hostelNumber}"></td>
+                                        <td th:text="${h.roomNumber}"></td>
+                                        <td class="font-weight-bold">
+                                            <span  th:if="${h.feesStatus}" class="text-success">Paid</span>
+                                            <span  th:unless="${h.feesStatus}" class="text-warning">Pending</span>
+                                        </td>
                                         <td>
                                             <a href="#" class="btn btn-warning btn-circle btn-sm">
                                                 <i class="fas fa-exclamation-triangle"></i>
@@ -57,6 +60,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -66,7 +70,6 @@
             </div>
         </div>
     </div>
-
 
 </body>
 

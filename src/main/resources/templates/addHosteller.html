@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="content">
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Add New Hosteller</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <form class="form-horizontal" method="post" th:object="${hostellerDetails}">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Hosteller Name</label>
+                                            <input id="name" name="name" class="form-control input-md" type="text"
+                                                th:field="*{name}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">HostellerId</label>
+                                            <input id="hostellerId" name="hostellerId" class="form-control input-md"
+                                            type="text" th:field="*{hostellerId}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Mobile number</label>
+                                            <input id="mobile" name="mobile" class="form-control input-md" type="text"
+                                            th:field="*{mobile}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Email id</label>
+                                            <input id="email" name="email" class="form-control input-md" type="text"
+                                            th:field="*{email}">
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Password</label>
+                                            <input id="password" name="password" class="form-control input-md" type="text"
+                                            th:field="*{password}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Confirm Password</label>
+                                            <input id="confirmPassword" name="confirmPassword" class="form-control input-md" type="text">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Hostel Number</label>
+                                            <input id="hostelNumber" name="hostelNumber" class="form-control input-md"
+                                            type="text" th:field="*{hostelNumber}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Room Number</label>
+                                            <input id="roomNumber" name="roomNumber" class="form-control input-md"
+                                            type="text" th:field="*{roomNumber}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Entry Date</label>
+                                            <input id="entryDate" name="entryDate" class="form-control input-md" type="date"
+                                            th:field="*{entryDate}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Address</label>
+                                            <input id="address" name="address" class="form-control input-md" type="text"
+                                            th:field="*{address}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Identity Type</label>
+                                            <input id="identityType" name="identityType" class="form-control input-md"
+                                            type="text" th:field="*{identityType}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Identity Number</label>
+                                            <input id="identityNumber" name="identityNumber" class="form-control input-md"
+                                            type="text" th:field="*{identityNumber}">
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                </div>
+                                
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Total Fees Amount</label>
+                                            <input id="totalFeesAmount" name="totalFeesAmount" class="form-control input-md"
+                                            type="text" th:field="*{totalFeesAmount}">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="row text-center">
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

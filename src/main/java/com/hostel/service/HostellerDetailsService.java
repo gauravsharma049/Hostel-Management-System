@@ -7,7 +7,7 @@ import com.hostel.model.HostellerDetails;
 
 public interface HostellerDetailsService {
     HostellerDetails save(HostellerDetailsDto hostellerDetails);
-    HostellerDetails update(HostellerDetailsDto hostellerDetails);
+    HostellerDetails update(int id, HostellerDetailsDto hostellerDetails);
     HostellerDetails findById(int id);
     List<HostellerDetailsDto> findAllHostellerDetails();
     void delete(int id);

@@ -17,19 +17,16 @@ import com.hostel.service.HostellerDetailsService;
 public class HostellerDetailsServiceImpl implements HostellerDetailsService{
     @Autowired UserServiceImpl userService;
     @Autowired HostellerDetailsRepository hostellerDetailsRepository;
+    @Autowired HostelFeesServiceImpl hostelFeesService;
 
-
-    @Override
-    public HostellerDetails save(HostellerDetailsDto hostellerDetailsDto) {
-        UserDto userDto = new UserDto();
-        userDto.setName(hostellerDetailsDto.getName());
-        userDto.setMobile(hostellerDetailsDto.getMobile());
-        userDto.setEmail(hostellerDetailsDto.getEmail());
-        userDto.setPassword(hostellerDetailsDto.getPassword());
-        userDto.setRoles(hostellerDetailsDto.getRoles());
-
-        User user = userService.save(userDto);
-
+    public boolean feesStatus (int hostellerId){
+        double dueFeesAmount = hostellerDetailsRepository.findById(hostellerId).get().getDueFeesAmount();
+        if(dueFeesAmount == 0){
+            return true;
+        }
+        return false;
+    }
+    public HostellerDetails dtoToEntity(HostellerDetailsDto hostellerDetailsDto) {
         HostellerDetails hostellerDetails = new HostellerDetails();
         hostellerDetails.setHostellerId(hostellerDetailsDto.getHostellerId());
         hostellerDetails.setHostelNumber(hostellerDetailsDto.getHostelNumber());
@@ -43,6 +40,24 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
         hostellerDetails.setTotalFeesAmount(hostellerDetailsDto.getTotalFeesAmount());
         hostellerDetails.setPaidFeesAmount(hostellerDetailsDto.getPaidFeesAmount());
         hostellerDetails.setDueFeesAmount(hostellerDetailsDto.getDueFeesAmount());
+
+        return hostellerDetails;
+    }
+
+    @Override
+    public HostellerDetails save(HostellerDetailsDto hostellerDetailsDto) {
+        UserDto userDto = new UserDto();
+        userDto.setName(hostellerDetailsDto.getName());
+        userDto.setMobile(hostellerDetailsDto.getMobile());
+        userDto.setEmail(hostellerDetailsDto.getEmail());
+        userDto.setPassword(hostellerDetailsDto.getPassword());
+        userDto.setRoles(hostellerDetailsDto.getRoles());
+
+        User user = userService.save(userDto);
+
+        HostellerDetails hostellerDetails = dtoToEntity(hostellerDetailsDto);
+        hostellerDetails.setTotalFeesAmount(hostelFeesService.getHostelFeesDetails().getTotalFeesAmount());
+        hostellerDetails.setDueFeesAmount(hostellerDetails.getTotalFeesAmount());
         hostellerDetails.setFeesStatus(hostellerDetailsDto.isFeesStatus());
         hostellerDetails.setUser(user);
 
@@ -51,14 +66,53 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
 
     }
     @Override
-    public HostellerDetails update(HostellerDetailsDto hostellerDetails) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+    public HostellerDetails update(int id, HostellerDetailsDto hostellerDetailsdto) {
+        HostellerDetails hostellerDetails = dtoToEntity(hostellerDetailsdto);
+        HostellerDetails h2 = hostellerDetailsRepository.findById(id).get();
+        if(h2 != null) {
+            if(hostellerDetails.getAddress()!= null){
+                h2.setAddress(hostellerDetails.getAddress());
+            }
+            if(hostellerDetails.getEntryDate()!= null){
+                h2.setEntryDate(hostellerDetails.getEntryDate());
+            }
+            if(hostellerDetails.getDueFeesAmount() != 0){
+                h2.setDueFeesAmount(hostellerDetails.getDueFeesAmount());
+            }
+            if(hostellerDetails.getExitDate()!= null){
+                h2.setExitDate(hostellerDetails.getExitDate());
+            }
+            if(hostellerDetails.getHostelNumber()!= null){
+                h2.setHostelNumber(hostellerDetails.getHostelNumber());
+            }
+            if(hostellerDetails.isHostellerStatus()!= false){
+                h2.setHostellerStatus(hostellerDetails.isHostellerStatus());
+            }
+            if(hostellerDetails.getIdentityNumber()!= null){
+                h2.setIdentityNumber(hostellerDetails.getIdentityNumber());
+            }
+            if(hostellerDetails.getIdentityType()!= null){
+                h2.setIdentityType(hostellerDetails.getIdentityType());
+            }
+            if(hostellerDetails.getPaidFeesAmount() != 0){
+                h2.setPaidFeesAmount(hostellerDetails.getPaidFeesAmount());
+            }
+            if(hostellerDetails.getRoomNumber()!= null){
+                h2.setRoomNumber(hostellerDetails.getRoomNumber());
+            }
+            if(hostellerDetails.getTotalFeesAmount() != 0){
+                h2.setTotalFeesAmount(hostellerDetails.getTotalFeesAmount());
+            }
+            if(hostellerDetails.getUser()!= null){
+                h2.setUser(hostellerDetails.getUser());
+            }
+            h2.setFeesStatus(feesStatus(h2.getHostellerId()));
+        }
+        return hostellerDetailsRepository.save(h2);
     }
     @Override
     public HostellerDetails findById(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return hostellerDetailsRepository.findById(id).get();
     }
     @Override
     public List<HostellerDetailsDto> findAllHostellerDetails() {

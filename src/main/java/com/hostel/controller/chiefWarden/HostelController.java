@@ -90,4 +90,6 @@ public class HostelController {
         }
         return "redirect:/hostel";
     }
+
+    
 }

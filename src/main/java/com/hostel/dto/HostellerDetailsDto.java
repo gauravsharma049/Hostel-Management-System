@@ -33,8 +33,8 @@ public class HostellerDetailsDto {
     //is available or left the hostel
     private boolean hostellerStatus;
     private double totalFeesAmount;
-    private String paidFeesAmount;
-    private String dueFeesAmount;
+    private double paidFeesAmount;
+    private double dueFeesAmount;
     private boolean feesStatus;
     
     private User user;

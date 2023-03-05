@@ -30,15 +30,17 @@
                               enctype="multipart/form-data" th:object="${hostel}">
                             <fieldset>
                                 <!-- Form Name -->
-                                <legend>ADD HOSTEL</legend>
+                                <legend>ADD Hostel</legend>
 
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="name">HOSTEL NAME</label>
                                     <div class="col-md-4">
                                         <input id="name" th:value="${hostel.name}" name="name"
-                                               class="form-control input-md" type="text" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''">
-                                        <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}" th:text="${error}"></div>
+                                               class="form-control input-md" type="text"
+                                               th:classappend="${#fields.hasErrors('name')}?'is-invalid':''">
+                                        <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}"
+                                             th:text="${error}"></div>
                                     </div>
                                 </div>
 
@@ -88,8 +90,6 @@
         </div>
     </div>
 </div>
-</div>
-
 
 </body>
 

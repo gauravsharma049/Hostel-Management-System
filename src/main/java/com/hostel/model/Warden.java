@@ -22,5 +22,6 @@ public class Warden {
     private String address;
     private String gender;
     @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hostel_id",referencedColumnName = "hostel_id")
     private Hostel hostel;
 }

@@ -72,7 +72,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each=" f: ${feeReceipt}">
+                                    <tr th:if="${#lists.size(feeReceipt) == 0}">
+                                        <td colspan="7">No Fee Payment Records </td>
+                                    </tr>
+        
+                                    <tr th:unless="${#lists.size(feeReceipt) == 0}" th:each=" f: ${feeReceipt}">
                                         <td th:text="${f.hostellerDetails.user.name}"></td>
                                         <td th:text="${f.paymentId}"></td>
                                         <td th:text="${f.paymentType}"></td>

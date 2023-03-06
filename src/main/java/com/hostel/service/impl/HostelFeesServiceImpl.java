@@ -31,6 +31,7 @@ public class HostelFeesServiceImpl implements HostelFeesService{
             hostelFeesDetailsRepository.save(hostelFeesDetails);
             return;
         }
+        
         HostelFeesDetails hostelFeesDetails = hostelFeesDetailsRepository.findById(1).get();
         hostelFeesDetails.setTotalFeesAmount(amount);
         hostelFeesDetailsRepository.save(hostelFeesDetails);

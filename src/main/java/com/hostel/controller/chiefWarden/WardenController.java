@@ -46,7 +46,7 @@ public class WardenController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed","Failed");
         }
-        return "redirect:/warden";
+        return "redirect:/indexWarden";
     }
 
 }

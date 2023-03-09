@@ -61,4 +61,14 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
     }
 
+    public UserDto findByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setUserId(user.getUserId());
+        userDto.setMobile(user.getMobile());
+        userDto.setEmail(user.getEmail());
+        return userDto;
+    }
+
 }

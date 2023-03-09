@@ -3,7 +3,6 @@ package com.hostel.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.hostel.helper.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hostel.dto.UserDto;
+import com.hostel.helper.Message;
 import com.hostel.service.impl.HostellerDetailsServiceImpl;
 import com.hostel.service.impl.UserServiceImpl;
 

@@ -80,14 +80,26 @@
                                 </div>
 
                                 <!-- Text input-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="col-md-4 control-label" for="hostel">HOSTEL ID</label>-->
+<!--                                    <div class="col-md-4">-->
+<!--                                        <input id="hostel" th:field="*{hostel}" name="hostel"-->
+<!--                                               class="form-control input-md" type="text">-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <!-- Select Basic -->
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label" for="hostel">HOSTEL ID</label>
+                                    <label class="col-md-4 control-label" for="hostel">HOSTEL</label>
                                     <div class="col-md-4">
-                                        <input id="hostel" th:field="*{hostel}" name="hostel"
-                                               class="form-control input-md" type="text">
+                                        <select id="hostel" th:field="*{hostel}" name="hostel" class="form-control">
+                                            <option th:value="null">-SELECT-</option>
+                                            <option th:each="hostel : ${hostels}"
+                                                    th:value="${hostel.hostelId}"
+                                                    th:text="${hostel.name}">
+                                            </option>
+                                        </select>
                                     </div>
                                 </div>
-
                             </fieldset>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>

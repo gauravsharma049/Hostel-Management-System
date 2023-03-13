@@ -40,7 +40,6 @@
                                cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Hostel ID</th>
                                 <th>Hostel Name</th>
                                 <th>Hostel Type</th>
                                 <th>No. of Room</th>
@@ -51,7 +50,6 @@
                             </thead>
                             <tbody>
                             <tr th:each="hostel : ${hostels}">
-                                <td th:text="${hostel.hostelId}"></td>
                                 <td th:text="${hostel.name}"></td>
                                 <td th:text="${hostel.type}"></td>
                                 <td th:text="${hostel.noOfRoom}"></td>

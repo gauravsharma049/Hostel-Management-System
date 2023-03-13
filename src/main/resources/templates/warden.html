@@ -19,46 +19,85 @@
 
             <!-- Page Heading -->
 
+            <div th:if="${success}" class="text-center alert alert-success">
+                <p th:text="${success}"></p>
+            </div>
+            <div th:if="${failed}" class="mt-1 text-center alert alert-danger">
+                <p th:text="${failed}"></p>
+            </div>
+
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Manage Warden</h6>
+                    <div class="mt-2" th:if="${size==0}">
+                        <p>No Warden Found</p>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table th:if="${size>0}" class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
-                                <th>Hostel ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
+                                <th>Hostel</th>
+                                <th>Warden Name</th>
                                 <th>Phone</th>
+                                <th>Email</th>
                                 <th>Address</th>
                                 <th>Gender</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>HOS001</td>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
+                            <tr th:each="warden : ${wardens}">
+                                <td th:text="${warden.hostel.name}"></td>
+                                <td th:text="${warden.name}"></td>
+                                <td th:text="${warden.phone}"></td>
+                                <td th:text="${warden.email}"></td>
+                                <td th:text="${warden.address}"></td>
+                                <td th:text="${warden.gender}"></td>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-circle btn-sm">
-                                        <i class="fas fa-exclamation-triangle"></i>
+                                    <a th:href="@{/update-warden/{id} (id = ${warden.wardenId})}"
+                                       class="btn btn-warning btn-circle btn-sm">
+                                        <i class="fas fa-info-circle"></i>
                                     </a>
-                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                    <a class="btn btn-danger btn-circle btn-sm" href="#" data-toggle="modal"
+                                       data-target="#deleteModal">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    <!-- Delete Modal-->
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel1">Ready to Leave?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Select "Delete" below if you are ready to delete
+                                                    this hostel.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-dismiss="modal">Cancel
+                                                    </button>
+                                                    <a class="btn btn-primary"
+                                                       th:href="@{/delete-warden/{id} (id = ${warden.wardenId})}">Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                        <a th:href="@{/add-warden}"
+                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-1"><i
+                                class="fas fa-sm text-white-50"></i> Add Warden</a>
                     </div>
                 </div>
             </div>

@@ -20,7 +20,14 @@ public class WardenServiceImpl implements WardenService {
 
     @Override
     public Warden update(Warden warden) {
-        return null;
+        Warden wardenUpdate = wardenRepository.findById(warden.getWardenId()).get();
+        wardenUpdate.setName(warden.getName());
+        wardenUpdate.setEmail(warden.getEmail());
+        wardenUpdate.setPhone(warden.getPhone());
+        wardenUpdate.setAddress(warden.getAddress());
+        wardenUpdate.setGender(warden.getGender());
+        wardenUpdate.setHostel(warden.getHostel());
+        return wardenRepository.save(wardenUpdate);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.hostel.controller.feesPayment;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,15 +16,30 @@ import com.hostel.model.Fees;
 import com.hostel.model.HostelFeesDetails;
 import com.hostel.service.impl.FeesPaymentServiceImpl;
 import com.hostel.service.impl.HostelFeesServiceImpl;
+import com.hostel.service.impl.HostellerDetailsServiceImpl;
+import com.hostel.service.impl.UserServiceImpl;
 
 @Controller
 public class FeesPaymentController {
     
     @Autowired FeesPaymentServiceImpl feesPaymentService;
     @Autowired HostelFeesServiceImpl hostelFeesService;
+    @Autowired UserServiceImpl userService;
+    @Autowired HostellerDetailsServiceImpl hostellerDetailsService;
 
+    public int loggedInUser(Principal principal){
+        try{
+            return hostellerDetailsService.findByUserId(userService.findByEmail(principal.getName()).getUserId()).getHostellerId();
+        }
+        catch(Exception e){
+            return 0;
+        }
+    }
     @PostMapping("/payment")
-    public String payFees(@ModelAttribute("paymentInfo") FeesPaymentDto feesPaymentDto) {
+    public String payFees(@ModelAttribute("paymentInfo") FeesPaymentDto feesPaymentDto, Principal principal) {
+        if(feesPaymentDto.getHostellerId()==0 && loggedInUser(principal) != 0){
+            feesPaymentDto.setHostellerId(loggedInUser(principal));
+        }
         feesPaymentService.payFees(feesPaymentDto.getAmount(), feesPaymentDto.getHostellerId());
         return "makePayment";
     }
@@ -48,8 +64,11 @@ public class FeesPaymentController {
     }
 
     @GetMapping("/fee_receipt")
-    public String reqestFeeReceipt(Model model){
+    public String reqestFeeReceipt(Model model, Principal principal){
         List<Fees> fees = new ArrayList<>();
+        if(loggedInUser(principal)!=0){
+            fees.addAll(feesPaymentService.getAllPaymentRecords(loggedInUser(principal)));
+        }
         model.addAttribute("feeReceipt", fees);
         model.addAttribute("hostellerId", new FeesPaymentDto().getHostellerId());
         return "feeReceipt";

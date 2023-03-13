@@ -1,5 +1,6 @@
 package com.hostel.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -30,6 +31,6 @@ public class HostellerDetails {
     private double paidFeesAmount;
     private double dueFeesAmount;
     private boolean feesStatus;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private User user;
 }

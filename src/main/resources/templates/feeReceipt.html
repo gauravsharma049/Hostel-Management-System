@@ -8,8 +8,9 @@
 </head>
 <body>
     <div class="content">
-        <!-- Content Row -->
-        <div class="row">
+        <div th:each="r : ${loginInfo.roles}">
+            <!-- Content Row -->
+        <div class="row" th:if="${r.id}==1">
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -42,6 +43,7 @@
                 </div>
 
             </div>
+        </div>
         </div>
 
         <!-- Content Row -->

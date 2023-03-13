@@ -41,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr th:each=" h: ${hostellers}">
+                                    <tr th:each=" h: ${hostellers}" th:id="${h.hostellerId}">
                                         <td th:text="${h.hostellerId}"></td>
                                         <td th:text="${h.name}"></td>
                                         <td th:text="${h.mobile}"></td>
@@ -57,9 +57,10 @@
                                             <a href="#" class="btn btn-warning btn-circle btn-sm">
                                                 <i class="fas fa-exclamation-triangle"></i>
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                            
+                                            <button class="btn btn-danger btn-circle btn-sm">
                                                 <i class="fas fa-trash"></i>
-                                            </a>
+                                            </button>
                                         </td>
                                     </tr>
                                     
@@ -71,6 +72,7 @@
 
             </div>
         </div>
+        
     </div>
 
 </body>

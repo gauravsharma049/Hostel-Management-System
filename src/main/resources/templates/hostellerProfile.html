@@ -22,10 +22,12 @@
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Manage Profile</h6>
+                        <span th:text="${#lists.contains(loginInfoRoles, 4)}"></span>
                     </div>
                     <div class="card-body">
-                        <div>
-                            <form class="form-horizontal" method="post" th:object="${hostellerInfo}">
+
+                        <div th:if="${#lists.contains(loginInfoRoles, 4)}">
+                            <form class="form-horizontal" method="post" th:object="${hostellerProfile}">
                                 <div class="row">
                                     <div class="col-md-2 overflow-hidden">
                                         <img src="https://source.unsplash.com/1600x900/?'passport size photo for dp'"
@@ -57,7 +59,7 @@
                                                         class="form-control input-md" type="text"
                                                         th:field="*{user.mobile}">
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -68,12 +70,13 @@
                                                         type="text" th:field="*{identityType}">
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <label class="control-label" for="hostellerId">Identity Number</label>
+                                                    <label class="control-label" for="hostellerId">Identity
+                                                        Number</label>
                                                     <input id="hostellerId" name="hostellerId"
                                                         class="form-control input-md" type="text"
                                                         th:field="*{identityNumber}">
                                                 </div>
-                                                
+
                                                 <div class="col-md-3">
                                                     <label class="control-label" for="hostellerId">Hostel Number</label>
                                                     <input id="hostellerId" name="hostellerId"
@@ -85,7 +88,7 @@
                                                     <input id="name" name="name" class="form-control input-md"
                                                         type="text" th:field="*{roomNumber}">
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -101,7 +104,7 @@
                                                         class="form-control input-md" type="text"
                                                         th:field="*{entryDate}">
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
 

@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.hostel.dto.HostellerDetailsDto;
 import com.hostel.dto.UserDto;
 import com.hostel.model.HostellerDetails;
+import com.hostel.model.Role;
 import com.hostel.model.User;
 import com.hostel.repository.HostellerDetailsRepository;
+import com.hostel.repository.RoleRepository;
 import com.hostel.service.HostellerDetailsService;
 
 @Service
@@ -18,6 +20,7 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
     @Autowired UserServiceImpl userService;
     @Autowired HostellerDetailsRepository hostellerDetailsRepository;
     @Autowired HostelFeesServiceImpl hostelFeesService;
+    @Autowired RoleRepository roleRepository;
 
     public boolean feesStatus (int hostellerId){
         double dueFeesAmount = hostellerDetailsRepository.findById(hostellerId).get().getDueFeesAmount();
@@ -46,12 +49,16 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
 
     @Override
     public HostellerDetails save(HostellerDetailsDto hostellerDetailsDto) {
+        List<Role> roles = new ArrayList<>();
+        Role role = new Role(4, "ROLE_hosteller");
+        roleRepository.save(role);
+        roles.add(role);
         UserDto userDto = new UserDto();
         userDto.setName(hostellerDetailsDto.getName());
         userDto.setMobile(hostellerDetailsDto.getMobile());
         userDto.setEmail(hostellerDetailsDto.getEmail());
         userDto.setPassword(hostellerDetailsDto.getPassword());
-        userDto.setRoles(hostellerDetailsDto.getRoles());
+        userDto.setRoles(roles);
 
         User user = userService.save(userDto);
 
@@ -63,7 +70,7 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
 
         return hostellerDetailsRepository.save(hostellerDetails);
 
-
+        
     }
     @Override
     public HostellerDetails update(int id, HostellerDetailsDto hostellerDetailsdto) {
@@ -137,16 +144,19 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
             hostellerDetailsDto.setName(hostellerDetail.getUser().getName());
             hostellerDetailsDto.setMobile(hostellerDetail.getUser().getMobile());
             hostellerDetailsDto.setEmail(hostellerDetail.getUser().getEmail());
+            hostellerDetailsDto.setUser(hostellerDetail.getUser());
             hostellerDetailsDtos.add(hostellerDetailsDto);
         }
         return hostellerDetailsDtos;
     }
     @Override
     public void delete(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        hostellerDetailsRepository.deleteById(id);
     }
 
+    public HostellerDetails findByUserId(int id){
+        return hostellerDetailsRepository.findByUserUserId(id);
+    }
     //save hosteller details
     
 }

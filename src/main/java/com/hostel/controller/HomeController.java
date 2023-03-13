@@ -1,5 +1,8 @@
 package com.hostel.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hostel.dto.UserDto;
 import com.hostel.helper.Message;
+import com.hostel.model.Role;
+import com.hostel.service.RoleService;
 import com.hostel.service.impl.HostellerDetailsServiceImpl;
 import com.hostel.service.impl.UserServiceImpl;
 
@@ -22,6 +27,7 @@ public class HomeController {
     @Autowired
     private UserServiceImpl userService;
     @Autowired private HostellerDetailsServiceImpl hostellersService;
+    @Autowired private RoleService roleService;
     @GetMapping("/")
     public String home() {
         return "dashboard";
@@ -64,7 +70,11 @@ public class HomeController {
             return "register";
         }
         try{
-
+            List<Role> roles = new ArrayList<>();
+            Role role = new Role(1, "ROLE_warden");
+            roleService.save(role);
+            roles.add(role);
+            userDto.setRoles(roles);
             System.out.println(userDto);
             userService.save(userDto);
             model.addAttribute("user", new UserDto());

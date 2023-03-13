@@ -27,7 +27,7 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="row justify-content-around">
-                                        <div class="col-md-4">
+                                        <div class="col-md-4" th:if="${#lists.containsAll(loginInfoRoles, {1})}">
                                             <label class="control-label" for="name">Hosteller id</label>
                                             <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
                                                 th:field="*{hostellerId}">

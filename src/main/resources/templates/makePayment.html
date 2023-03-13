@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Make Payment</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <form class="form-horizontal" method="post" th:object="${paymentInfo}">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <div class="row justify-content-around">
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Hosteller id</label>
+                                            <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
+                                                th:field="*{hostellerId}">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="control-label" for="name">Amount to pay</label>
+                                            <input id="amount" name="amount" class="form-control input-md"
+                                            type="text" th:field="*{amount}">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div class="form-group">
+                                    <div class="row text-center">
+                                        <div class="col-4">
+                                        </div>
+                                        <div class="col-4">
+                                            <button type="submit" class="btn btn-lg btn-block btn-primary">Pay</button>
+                                        </div>
+                                        <div class="col-4">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

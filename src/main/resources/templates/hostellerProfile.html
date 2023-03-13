@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="content">
+
+        <div class="row">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Manage Profile</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <form class="form-horizontal" method="post" th:object="${hostellerInfo}">
+                                <div class="row">
+                                    <div class="col-md-2 overflow-hidden">
+                                        <img src="https://source.unsplash.com/1600x900/?'passport size photo for dp'"
+                                            class="img-thumbnail" alt="...">
+                                        <input type="file">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <!-- Text input-->
+                                        <div class="form-group">
+                                            <div class="row justify-content-around">
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="name">Hosteller Name</label>
+                                                    <input id="name" name="name" class="form-control input-md"
+                                                        type="text" th:field="*{user.name}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="name">Hosteller Id</label>
+                                                    <input id="name" name="name" class="form-control input-md"
+                                                        type="text" th:field="*{hostellerId}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="name">Email</label>
+                                                    <input id="name" name="name" class="form-control input-md"
+                                                        type="text" th:field="*{user.email}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="hostellerId">Mobile</label>
+                                                    <input id="hostellerId" name="hostellerId"
+                                                        class="form-control input-md" type="text"
+                                                        th:field="*{user.mobile}">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row justify-content-around">
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="name">Identity Type</label>
+                                                    <input id="name" name="name" class="form-control input-md"
+                                                        type="text" th:field="*{identityType}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="hostellerId">Identity Number</label>
+                                                    <input id="hostellerId" name="hostellerId"
+                                                        class="form-control input-md" type="text"
+                                                        th:field="*{identityNumber}">
+                                                </div>
+                                                
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="hostellerId">Hostel Number</label>
+                                                    <input id="hostellerId" name="hostellerId"
+                                                        class="form-control input-md" type="text"
+                                                        th:field="*{hostelNumber}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="name">Room Number</label>
+                                                    <input id="name" name="name" class="form-control input-md"
+                                                        type="text" th:field="*{roomNumber}">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="hostellerId">Address</label>
+                                                    <input id="hostellerId" name="hostellerId"
+                                                        class="form-control input-md" type="text" th:field="*{address}">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="control-label" for="hostellerId">Entry Date</label>
+                                                    <input id="hostellerId" name="hostellerId"
+                                                        class="form-control input-md" type="text"
+                                                        th:field="*{entryDate}">
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary">Update Profile</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

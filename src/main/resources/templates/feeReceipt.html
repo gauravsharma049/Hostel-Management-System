@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content">
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Hosteller information</h6>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <form class="form-horizontal" method="post" th:object="${hostellerId}">
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
+                                               th:value="${hostellerId}" placeholder="Hosteller Id">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-primary">View Receipt</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+
+                <!-- DataTales Example -->
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Fee Receipts</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Hosteller Name</th>
+                                        <th>Payment Id</th>
+                                        <th>Payment Type</th>
+                                        <th>Payment Date and Time</th>
+                                        <th>Payment Amount</th>
+                                        <th>Payment Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                    <tr th:if="${#lists.size(feeReceipt) == 0}">
+                                        <td colspan="7">No Fee Payment Records </td>
+                                    </tr>
+                                    <tr th:unless="${#lists.size(feeReceipt) == 0}" th:each=" f: ${feeReceipt}">
+                                        <td th:text="${f.hostellerDetails.user.name}"></td>
+                                        <td th:text="${f.paymentId}"></td>
+                                        <td th:text="${f.paymentType}"></td>
+                                        <td th:text="${f.paymentDateAndTime}"></td>
+                                        <td th:text="${f.paymentAmount}"></td>
+                                        <td>
+                                            <span  th:if="${f.paymentStatus}" class="bg-success text-white px-1" style="border-radius: .25rem;">success</span>
+                                            <span  th:unless="${f.paymentStatus}" class="bg-danger text-white" style="border-radius: .20rem;">failed</span>
+                                        </td>
+                                        <td>
+                                            <a href="#" class="btn btn-warning btn-circle btn-sm">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </a>
+                                            <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

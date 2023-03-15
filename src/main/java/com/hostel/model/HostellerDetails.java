@@ -1,19 +1,16 @@
 package com.hostel.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 public class HostellerDetails {
     @Id
@@ -33,4 +30,7 @@ public class HostellerDetails {
     private boolean feesStatus;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "hostellerDetails")
+    private List<Fees> feesList;
 }

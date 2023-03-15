@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hostel.dto.HostellerDetailsDto;
@@ -21,6 +22,8 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
     @Autowired HostellerDetailsRepository hostellerDetailsRepository;
     @Autowired HostelFeesServiceImpl hostelFeesService;
     @Autowired RoleRepository roleRepository;
+    @Autowired
+    BCryptPasswordEncoder passwordEncoder;
 
     public boolean feesStatus (int hostellerId){
         double dueFeesAmount = hostellerDetailsRepository.findById(hostellerId).get().getDueFeesAmount();
@@ -43,7 +46,7 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
         hostellerDetails.setTotalFeesAmount(hostellerDetailsDto.getTotalFeesAmount());
         hostellerDetails.setPaidFeesAmount(hostellerDetailsDto.getPaidFeesAmount());
         hostellerDetails.setDueFeesAmount(hostellerDetailsDto.getDueFeesAmount());
-
+        hostellerDetails.setUser(hostellerDetailsDto.getUser());
         return hostellerDetails;
     }
 
@@ -53,23 +56,26 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
         Role role = new Role(4, "ROLE_hosteller");
         roleRepository.save(role);
         roles.add(role);
-        UserDto userDto = new UserDto();
-        userDto.setName(hostellerDetailsDto.getName());
-        userDto.setMobile(hostellerDetailsDto.getMobile());
-        userDto.setEmail(hostellerDetailsDto.getEmail());
-        userDto.setPassword(hostellerDetailsDto.getPassword());
-        userDto.setRoles(roles);
+        hostellerDetailsDto.getUser().setRoles(roles);
+        hostellerDetailsDto.getUser().setPassword(passwordEncoder.encode(hostellerDetailsDto.getUser().getPassword()));
 
-        User user = userService.save(userDto);
+//        UserDto userDto = new UserDto();
+//        userDto.setName(hostellerDetailsDto.getName());
+//        userDto.setMobile(hostellerDetailsDto.getMobile());
+//        userDto.setEmail(hostellerDetailsDto.getEmail());
+//        userDto.setPassword(hostellerDetailsDto.getPassword());
+//        userDto.setRoles(roles);
+//
+//        User user = userService.save(userDto);
 
         HostellerDetails hostellerDetails = dtoToEntity(hostellerDetailsDto);
         hostellerDetails.setTotalFeesAmount(hostelFeesService.getHostelFeesDetails().getTotalFeesAmount());
         hostellerDetails.setDueFeesAmount(hostellerDetails.getTotalFeesAmount());
         hostellerDetails.setFeesStatus(hostellerDetailsDto.isFeesStatus());
-        hostellerDetails.setUser(user);
-
+//        hostellerDetails.setUser(user);
+        System.out.println(hostellerDetails);
         return hostellerDetailsRepository.save(hostellerDetails);
-
+//          return null;
         
     }
     @Override
@@ -111,7 +117,18 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
                 h2.setTotalFeesAmount(hostellerDetails.getTotalFeesAmount());
             }
             if(hostellerDetails.getUser()!= null){
-                h2.setUser(hostellerDetails.getUser());
+                User user = h2.getUser();
+                User u = hostellerDetails.getUser();
+                if(u.getName()!=null && !u.getName().equals(user.getName())){
+                    user.setName(u.getName());
+                }
+                if(u.getEmail() != null && !u.getEmail().equals(user.getEmail())){
+                    user.setEmail(u.getEmail());
+                }
+                if(u.getMobile() != null && !u.getMobile().equals(user.getMobile())){
+                    user.setMobile(u.getMobile());
+                }
+                h2.setUser(user);
             }
             h2.setFeesStatus(feesStatus(h2.getHostellerId()));
         }

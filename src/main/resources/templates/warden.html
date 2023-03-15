@@ -29,7 +29,12 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Manage Warden</h6>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Manage Warden</h6>
+                        <a th:href="@{/warden_c/add-warden}"
+                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-1"><i
+                                class="fas fa-sm text-white-50"></i> Add Warden</a>
+                    </div>
                     <div class="mt-2" th:if="${size==0}">
                         <p>No Warden Found</p>
                     </div>
@@ -51,9 +56,9 @@
                             <tbody>
                             <tr th:each="warden : ${wardens}">
                                 <td th:text="${warden.hostel.name}"></td>
-                                <td th:text="${warden.name}"></td>
-                                <td th:text="${warden.phone}"></td>
-                                <td th:text="${warden.email}"></td>
+                                <td th:text="${warden.user.name}"></td>
+                                <td th:text="${warden.user.mobile}"></td>
+                                <td th:text="${warden.user.email}"></td>
                                 <td th:text="${warden.address}"></td>
                                 <td th:text="${warden.gender}"></td>
                                 <td>
@@ -95,9 +100,7 @@
                             </tr>
                             </tbody>
                         </table>
-                        <a th:href="@{/add-warden}"
-                           class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm mt-1"><i
-                                class="fas fa-sm text-white-50"></i> Add Warden</a>
+                        
                     </div>
                 </div>
             </div>

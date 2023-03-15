@@ -10,7 +10,7 @@ import com.hostel.repository.RoleRepository;
 public class RoleService {
     @Autowired RoleRepository roleRepository;
 
-    public void save(Role role) {
-        roleRepository.save(role);
+    public Role save(Role role) {
+        return roleRepository.save(role);
     }
 }

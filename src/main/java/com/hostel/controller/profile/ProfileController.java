@@ -17,7 +17,7 @@ public class ProfileController {
     @GetMapping("/profile")
     public String profile(Model model){
         
-        model.addAttribute("hostellerInfo", hostellersService.findById(11202715));
+        model.addAttribute("hostellerInfo", new HostellerDetailsDto());
         return "hostellerProfile";
     }
     @PostMapping("/profile")

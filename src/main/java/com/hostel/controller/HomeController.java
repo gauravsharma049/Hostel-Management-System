@@ -26,18 +26,13 @@ import com.hostel.service.impl.UserServiceImpl;
 public class HomeController {
     @Autowired
     private UserServiceImpl userService;
-    @Autowired private HostellerDetailsServiceImpl hostellersService;
     @Autowired private RoleService roleService;
     @GetMapping("/")
     public String home() {
         return "dashboard";
     }
 
-    @GetMapping("/hostellers-details")
-    public String hostellersDetails(Model model) {
-        model.addAttribute("hostellers", hostellersService.findAllHostellerDetails());
-        return "hostellersDetails";
-    }
+    
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -71,7 +66,7 @@ public class HomeController {
         }
         try{
             List<Role> roles = new ArrayList<>();
-            Role role = new Role(1, "ROLE_warden");
+            Role role = new Role(1, "ROLE_chiefwarden");
             roleService.save(role);
             roles.add(role);
             userDto.setRoles(roles);

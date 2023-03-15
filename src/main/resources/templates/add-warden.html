@@ -26,7 +26,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form class="form-horizontal" th:action="@{/save-warden}" method="post"
+                        <form class="form-horizontal" method="post"
                               enctype="multipart/form-data" th:object="${warden}">
                             <fieldset>
                                 <!-- Form Name -->
@@ -36,9 +36,9 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="name">NAME</label>
                                     <div class="col-md-4">
-                                        <input id="name" th:value="${warden.name}" name="name"
-                                               class="form-control input-md" type="text" th:classappend="${#fields.hasErrors('name')}?'is-invalid':''">
-                                        <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}" th:text="${error}"></div>
+                                        <input id="name" th:field="*{user.name}" name="name"
+                                               class="form-control input-md" type="text" >
+                                        <!-- <div class="invalid-feedback" th:each=" error: ${#fields.errors('name')}" th:text="${error}"></div> -->
                                     </div>
                                 </div>
 
@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="hostel_type">PHONE</label>
                                     <div class="col-md-4">
-                                        <input id="hostel_type" th:field="*{phone}" name="hostel_type"
+                                        <input id="mobile" th:field="*{user.mobile}" name="mobile"
                                                class="form-control input-md" type="text">
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label" for="no_of_rooms">EMAIL</label>
                                     <div class="col-md-4">
-                                        <input id="no_of_rooms" th:field="*{email}" name="no_of_rooms"
+                                        <input id="no_of_rooms" th:field="*{user.email}" name="email"
                                                class="form-control input-md" type="text">
 
                                     </div>

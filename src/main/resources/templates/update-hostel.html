@@ -26,8 +26,7 @@
         </div>
         <div class="card-body">
           <div class="table-responsive">
-            <form class="form-horizontal" th:action="@{/update-hostel/{id} (id = ${hostel.hostelId})}" method="post"
-                  enctype="multipart/form-data" th:object="${hostel}">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" th:object="${hostel}">
               <fieldset>
                 <!-- Form Name -->
                 <legend>UPDATE HOSTEL</legend>

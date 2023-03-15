@@ -1,20 +1,36 @@
 package com.hostel.service.impl;
 
+import com.hostel.dto.UserDto;
+import com.hostel.model.Role;
+import com.hostel.model.User;
 import com.hostel.model.Warden;
+import com.hostel.repository.UserRepository;
 import com.hostel.repository.WardenRepository;
+import com.hostel.service.RoleService;
 import com.hostel.service.WardenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class WardenServiceImpl implements WardenService {
 
     @Autowired
     private WardenRepository wardenRepository;
+    @Autowired UserServiceImpl userService;
+    @Autowired RoleService roleService;
+    @Autowired BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public Warden save(Warden warden) {
+        User user = warden.getUser();
+        user.setPassword(passwordEncoder.encode(user.getEmail()));
+        System.out.println(user);
+        List<Role> roles = new ArrayList<>();
+        roles.add(roleService.save(new Role(2, "ROLE_warden")));
+
         return wardenRepository.save(warden);
     }
 

@@ -8,6 +8,13 @@
 </head>
 <body>
     <div class="content">
+        <style>
+            @media only screen and (max-width: 768px) {
+                .viewFeeReceipt{
+                    margin-top: 10px;
+                }
+            }
+        </style>
         <div th:each="r : ${loginInfo.roles}">
             <!-- Content Row -->
         <div class="row" th:if="${r.id}==1">
@@ -32,7 +39,7 @@
                                             <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
                                                th:value="${hostellerId}" placeholder="Hosteller Id">
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-4 viewFeeReceipt">
                                             <button type="submit" class="btn btn-primary">View Receipt</button>
                                         </div>
                                     </div>

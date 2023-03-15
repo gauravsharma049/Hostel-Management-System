@@ -21,7 +21,9 @@ public class Warden {
     private String email;
     private String address;
     private String gender;
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "hostel_id",referencedColumnName = "hostel_id")
     private Hostel hostel;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 }

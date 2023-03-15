@@ -3,6 +3,7 @@ package com.hostel.controller.chiefWarden;
 import com.hostel.helper.Message;
 import com.hostel.model.Hostel;
 import com.hostel.service.HostelService;
+import com.hostel.service.impl.HostellerDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
+@RequestMapping("/warden_c")
 public class HostelController {
     @Autowired
     private HostelService hostelService;
-
+    @Autowired
+    private HostellerDetailsServiceImpl hostellerDetailsService;
     @GetMapping("/hostel")
     public String hostel(Model model) {
         List<Hostel> hostels = hostelService.findAllHostel();
@@ -35,7 +38,7 @@ public class HostelController {
         return "add-hostel";
     }
 
-    @PostMapping("/save-hostel")
+    @PostMapping("/add-hostel")
     public String addHostel(@Valid @ModelAttribute("hostel") Hostel hostel,
                             BindingResult bindingResult,
                             HttpSession session,
@@ -53,7 +56,7 @@ public class HostelController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed");
         }
-        return "redirect:/hostel";
+        return "redirect:/warden_c/hostel";
     }
 
     @GetMapping("/update-hostel/{id}")
@@ -76,7 +79,7 @@ public class HostelController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed","Failed !");
         }
-        return "redirect:/hostel";
+        return "redirect:/warden_c/hostel";
     }
 
     @GetMapping("/delete-hostel/{id}")
@@ -88,8 +91,19 @@ public class HostelController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed", "Failed !");
         }
-        return "redirect:/hostel";
+        return "redirect:/warden_c/hostel";
     }
 
-    
+    @GetMapping("/delete/hosteller/{id}")
+    public String delteHosteller(@PathVariable("id") int id, Model model, RedirectAttributes attributes){
+        try{
+            hostellerDetailsService.delete(id);
+            attributes.addFlashAttribute("success", "Deleted Successfully !");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            attributes.addFlashAttribute("failed", "Failed !");
+        }
+        return "redirect:/wardens/hostellers-details";
+    }
 }

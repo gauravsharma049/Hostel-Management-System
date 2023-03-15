@@ -15,7 +15,12 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-
+                <div th:if="${success}" class="text-center alert alert-success">
+                    <p th:text="${success}"></p>
+                </div>
+                <div th:if="${failed}" class="mt-1 text-center alert alert-danger">
+                    <p th:text="${failed}"></p>
+                </div>
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">

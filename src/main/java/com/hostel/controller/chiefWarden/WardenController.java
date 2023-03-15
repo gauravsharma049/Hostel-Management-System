@@ -1,9 +1,13 @@
 package com.hostel.controller.chiefWarden;
 
 import com.hostel.model.Hostel;
+import com.hostel.model.HostelFeesDetails;
+import com.hostel.model.User;
 import com.hostel.model.Warden;
 import com.hostel.service.HostelService;
 import com.hostel.service.WardenService;
+import com.hostel.service.impl.HostelFeesServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("/warden_c")
 public class WardenController {
 
     @Autowired
@@ -24,6 +30,7 @@ public class WardenController {
 
     @Autowired
     private HostelService hostelService;
+    @Autowired HostelFeesServiceImpl hostelFeesService;
 
     @GetMapping("/indexWarden")
     public String warden(Model model){
@@ -39,22 +46,27 @@ public class WardenController {
         List<Hostel> hostels = hostelService.findAllHostel();
         model.addAttribute("hostels",hostels);
         model.addAttribute("title","Add Warden");
-        model.addAttribute("warden", new Warden());
+        Warden warden = new Warden();
+        User user =new User();
+        user.setName("Bipin");
+        warden.setUser(user);
+        model.addAttribute("warden", warden);
         return "add-warden";
     }
 
-    @PostMapping("/save-warden")
-    public String addWarden(@ModelAttribute("warden")Warden warden,
+    @PostMapping("/add-warden")
+    public String addWarden(@ModelAttribute("warden") Warden warden,
                             HttpSession session,
                             RedirectAttributes attributes){
         try{
+            System.out.println(warden.getUser().getName() + " value ");
             wardenService.save(warden);
             attributes.addFlashAttribute("success","Added Successfully");
         }catch (Exception e){
             e.printStackTrace();
             attributes.addFlashAttribute("failed","Failed");
         }
-        return "redirect:/indexWarden";
+        return "redirect:/warden_c/indexWarden";
     }
 
     @GetMapping("/update-warden/{id}")
@@ -79,7 +91,7 @@ public class WardenController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed","Failed !");
         }
-        return "redirect:/indexWarden";
+        return "redirect:/warden_c/indexWarden";
     }
 
     @GetMapping("/delete-warden/{id}")
@@ -91,6 +103,23 @@ public class WardenController {
             e.printStackTrace();
             attributes.addFlashAttribute("failed","Failed !");
         }
-        return "redirect:/indexWarden";
+        return "redirect:/warden_c/indexWarden";
+    }
+
+    @PostMapping("/updatehostelfee")
+    public String updateFees(@ModelAttribute("totalFeesAmount") Double amount, RedirectAttributes attributes) {
+       try {
+           hostelFeesService.updateHostelFeesDetails(amount);
+            attributes.addFlashAttribute("success", "Updated Successfully !");
+       }
+       catch (Exception e){
+           attributes.addFlashAttribute("failed", "Something went wrong!");
+       }
+       return "redirect:/warden_c/updatehostelfee";
+    }
+    @GetMapping("/updatehostelfee")
+    public String getUpdateHostelFeePage(Model model){
+        model.addAttribute("totalFeesAmount", new HostelFeesDetails().getTotalFeesAmount());
+        return "changeHostelFees";
     }
 }

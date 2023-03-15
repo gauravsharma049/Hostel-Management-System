@@ -2,6 +2,8 @@ package com.hostel.model;
 
 import lombok.*;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
@@ -22,6 +24,6 @@ public class Hostel {
     private String noOfRoom;
     private String address;
     private String annualExp;
-    @OneToOne(mappedBy = "hostel")
-    private Warden warden;
+    @OneToMany(mappedBy = "hostel")
+    private List<Warden> warden;
 }

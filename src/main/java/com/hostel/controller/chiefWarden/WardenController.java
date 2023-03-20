@@ -76,7 +76,7 @@ public class WardenController {
         model.addAttribute("hostels",hostels);
         model.addAttribute("warden",warden);
         model.addAttribute("title","Update Form");
-        return "update-warden";
+        return "add-warden";
     }
 
     @PostMapping("/update-warden/{id}")

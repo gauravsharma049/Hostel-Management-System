@@ -30,16 +30,23 @@ public class WardenServiceImpl implements WardenService {
         System.out.println(user);
         List<Role> roles = new ArrayList<>();
         roles.add(roleService.save(new Role(2, "ROLE_warden")));
-
+        user.setRoles(roles);
+        System.out.println("warden data"+ warden);
         return wardenRepository.save(warden);
     }
 
     @Override
     public Warden update(Warden warden) {
         Warden wardenUpdate = wardenRepository.findById(warden.getWardenId()).get();
-        wardenUpdate.setName(warden.getName());
-        wardenUpdate.setEmail(warden.getEmail());
-        wardenUpdate.setPhone(warden.getPhone());
+        System.out.println(warden.getUser().getEmail());
+        User user = wardenUpdate.getUser();
+        user.setName(warden.getUser().getName());
+        user.setEmail(warden.getUser().getEmail());
+        user.setMobile(warden.getUser().getMobile());
+        wardenUpdate.setUser(user);
+        // wardenUpdate.setName(warden.getName());
+        // wardenUpdate.setEmail(warden.getEmail());
+        // wardenUpdate.setPhone(warden.getPhone());
         wardenUpdate.setAddress(warden.getAddress());
         wardenUpdate.setGender(warden.getGender());
         wardenUpdate.setHostel(warden.getHostel());

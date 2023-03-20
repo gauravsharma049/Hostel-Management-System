@@ -15,9 +15,9 @@
                 }
             }
         </style>
-        <div th:each="r : ${loginInfo.roles}">
+        
             <!-- Content Row -->
-        <div class="row" th:if="${r.id}==1">
+        <div class="row" th:if="${#lists.contains(loginInfoRoles, 1) or #lists.contains(loginInfoRoles, 2)}">
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
@@ -50,7 +50,6 @@
                 </div>
 
             </div>
-        </div>
         </div>
 
         <!-- Content Row -->

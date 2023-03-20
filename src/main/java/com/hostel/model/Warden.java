@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -26,4 +27,11 @@ public class Warden {
     private Hostel hostel;
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
+    @Override
+    public String toString() {
+        return "Warden [wardenId=" + wardenId + ", name=" + name + ", phone=" + phone + ", email=" + email
+                + ", address=" + address + ", gender=" + gender + ", hostel="  + ", user="+ user  + "]";
+    }
+
+    
 }

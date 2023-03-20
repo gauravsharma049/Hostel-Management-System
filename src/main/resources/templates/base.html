@@ -65,62 +65,32 @@
             <!-- below div is only visible by hostellers -->
             <div th:if="${#lists.contains(loginInfoRoles, 4)}">
             <!-- <div> -->
-                <li class="nav-item">
-                    <a class="nav-link" href="/payment">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Make Payment</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/profile">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/fee_receipt">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Fee Receipt</span>
-                    </a>
+                <li th:replace="fragments.html :: list(link='/payment', text='Make Payment', icon='payment')"></li>
+                
+                <li th:replace="fragments.html :: list(link='/profile', text='Profile', icon='user-card')"></li>
+                
+                <li th:replace="fragments.html :: list(link='/fee_receipt', text='View Fee Receipt', icon='receipt')">
                 </li>
             </div>
-            <!-- below div is only visible by wardens -->
+            <div th:if="${#lists.contains(loginInfoRoles, 2)}">
+                <li th:replace="fragments.html :: list(link='/wardens/add-hosteller', text='Add new Hosteller', icon='add-user')"></li>
+                <li th:replace="fragments.html :: list(link='/wardens/hostellers-details', text='Hosteller Details', icon='table')"></li>
+                <li th:replace="fragments.html :: list(link='/payment', text='Make Payment', icon='payment')"></li>
+                <li th:replace="fragments.html :: list(link='/fee_receipt', text='View Fee Receipt', icon='receipt')"></li>
+            </div>
+            <!-- below div is only visible by chief wardens -->
             <div th:if="${#lists.contains(loginInfoRoles, 1)}">
-                <li class="nav-item">
-                    <a class="nav-link" href="/warden_c/indexWarden">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Warden</span>
-                    </a>
+                
+                <li th:replace="fragments.html :: list(link='/warden_c/indexWarden', text='Warden', icon='table')"></li>
+                
+                <li th:replace="fragments.html :: list(link='/warden_c/hostel', text='Hostels', icon='hostel')"></li>
+                
+                <li th:replace="fragments.html :: list(link='/warden_c/updatehostelfee', text='Update Hostel Fees', icon='update')"></li>
+                
+               
 
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/warden_c/hostel">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Hostel</span>
-                    </a>
-
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/warden_c/updatehostelfee">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Update Hostel Fees</span>
-                    </a>
-
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="/wardens/add-hosteller">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Add New Hosteller</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/wardens/hostellers-details">
-                        <i class="fas fa-fw fa-table"></i>
-                        <span>Hostellers Details</span>
-                    </a>
-
-                </li>
+                <li th:replace="fragments.html :: list(link='/wardens/hostellers-details', text='Hosteller Details', icon='table')"></li>
+                
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
@@ -132,31 +102,21 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-transparent manage py-0 my-0 collapse-inner rounded">
                             <ul class="list-unstyled">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/wardens/add-hosteller">
-                                        <i class="fas fa-fw fa-table"></i>
-                                        <span>Add New Hosteller</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/payment">
-                                        <i class="fas fa-fw fa-table"></i>
-                                        <span>Make Payment</span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/fee_receipt">
-                                        <i class="fas fa-fw fa-table"></i>
-                                        <span>View Fee Receipt</span>
-                                    </a>
-                                </li>
+
+                                <li th:replace="fragments.html :: list(link='/wardens/add-hosteller', text='Add new Hosteller', icon='add-user')"></li>
+                
+                                <li th:replace="fragments.html :: list(link='/payment', text='Make Payment', icon='payment')"></li>
+                                
+                                <li th:replace="fragments.html :: list(link='/fee_receipt', text='View Fee Receipt', icon='receipt')"></li>
+            
                             </ul>
                         </div>
                     </div>
                 </li>
 
             </div>
-            <div th:if="${#lists.contains(loginInfoRoles, 1)}">
+            
+            <div th:if="${#lists.contains(loginInfoRoles, 3)}">
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -225,12 +185,8 @@
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Change Password</span>
-                </a>
-            </li>
+            <li th:replace="fragments.html :: list(link='#', text='Change Password', icon='password')"></li>
+                
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

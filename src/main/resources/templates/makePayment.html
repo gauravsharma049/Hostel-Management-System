@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{:: .content})">
+<!-- <html lang="en"  xmlns:th="http://www.thymeleaf.org" th:replace="base.html :: layout(.content)"> -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,7 +33,7 @@
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="row justify-content-around">
-                                        <div class="col-md-4" th:if="${#lists.containsAll(loginInfoRoles, {1})}">
+                                        <div class="col-md-4" th:if="${#lists.contains(loginInfoRoles, 1) or #lists.contains(loginInfoRoles, 2)}">
                                             <label class="control-label" for="name">Hosteller id</label>
                                             <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
                                                 th:field="*{hostellerId}">

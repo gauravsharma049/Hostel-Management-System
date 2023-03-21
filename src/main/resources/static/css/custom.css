@@ -1,0 +1,12 @@
+.text-sm {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.25rem; /* 20px */
+}
+
+
+@media screen and (min-width: 500px) {
+    .manage{
+    background-color: #4e73df !important;
+    min-width: 104px !important;
+    }
+}

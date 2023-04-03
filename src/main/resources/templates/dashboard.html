@@ -55,7 +55,7 @@
                 <div class="mb-4">
                     
                     <!-- Make Payment Card Example -->
-                    <div th:replace="fragments.html :: card-col(link='#', heading='Make Payment', text='20000', class='warning', icon='null')"></div>
+                    <div th:replace="fragments.html :: card-col(link='/payment', heading='Make Payment', text='₹ '+ ${hostellerProfile.dueFeesAmount}, class='warning', icon='null')"></div>
                         
                     <!-- Complain Card Example -->
                     <div th:replace="fragments.html :: card-col(link='#', heading='Complain', text='Write Complain', class='success', icon='null')"></div>

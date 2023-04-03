@@ -28,22 +28,50 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-4">
-                                i don't know what to put here
+                            <div class="col-md-5">
+                                <div th:if="${#lists.contains(loginInfoRoles, 1)}">i don't know what to put here</div>
+                                <div th:if="${#lists.contains(loginInfoRoles, 4)}">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Description</th>
+                                            <th scope="col">Amount Due</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Hostel Fee <br>
+                                                Mess Charges <br> 2022-2023
+                                            </td>
+                                            <td>Hostel No: <span th:text="${hostellerProfile.hostelNumber}"></span> <br>
+                                                Double Seater [Bath] <br>
+                                                (Room No: <span th:text="${hostellerProfile.roomNumber}"></span>) <br>
+                                                Total : ₹ <span th:text="${hostellerProfile.totalFeesAmount}"></span></td>
+                                            <td>₹ <span th:text="${hostellerProfile.dueFeesAmount}"></span></td>
+                                          </tr>
+                                          <tr>
+                                            <th scope="row"></th>
+                                            <td>Total Amount</td>
+                                            <td>₹ <span th:text="${hostellerProfile.dueFeesAmount}"></span></td>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                </div>
                             </div>
-                            <form class="form-horizontal col-md-8" method="post" th:object="${paymentInfo}">
+                            <form class="form-horizontal col-md-7" method="post" th:object="${paymentInfo}">
                                 <!-- Text input-->
                                 <div class="form-group">
                                     <div class="row justify-content-around">
                                         <div class="col-md-4" th:if="${#lists.contains(loginInfoRoles, 1) or #lists.contains(loginInfoRoles, 2)}">
-                                            <label class="control-label" for="name">Hosteller id</label>
+                                            <label class="control-label" for="hostellerId">Hosteller id</label>
                                             <input id="hostellerId" name="hostellerId" class="form-control input-md" type="text"
                                                 th:field="*{hostellerId}">
                                         </div>
                                         <div class="col-md-4">
                                             <label class="control-label" for="name">Amount to pay</label>
                                             <input id="amount" name="amount" class="form-control input-md"
-                                            type="text" th:field="*{amount}">
+                                            type="text"  th:value="${#lists.contains(loginInfoRoles, 4)} ? ${hostellerProfile.dueFeesAmount} : *{amount}">
                                         </div>
                                     </div>
                                 </div>

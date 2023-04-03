@@ -23,6 +23,6 @@ public class ProfileController {
     @PostMapping("/profile")
     public String profile(@ModelAttribute("hostellerInfo") HostellerDetailsDto hostellerDetailsDto){
         hostellersService.update(hostellerDetailsDto.getHostellerId(), hostellerDetailsDto);
-        return "hostellerProfile";
+        return "redirect:/profile";
     }
 }

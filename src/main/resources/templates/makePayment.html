@@ -70,7 +70,7 @@
                                                 th:field="*{hostellerId}">
                                         </div>
                                         <div class="col-md-4">
-                                            <label class="control-label" for="name">Amount to pay</label>
+                                            <label class="control-label" for="amount">Amount to pay</label>
                                             <input id="amount" name="amount" class="form-control input-md"
                                             type="number"  th:value="${#lists.contains(loginInfoRoles, 4)} ? ${hostellerProfile.dueFeesAmount} : *{amount}">
                                         </div>

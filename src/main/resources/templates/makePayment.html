@@ -96,8 +96,11 @@
 
             </div>
         </div>
-        <script th:inline="javascript">
+        <script th:inline="javascript" th:if="${#lists.contains(loginInfoRoles, 4)}">
             var userProfile = {name: [[${hostellerProfile.user.name}]], email: [[${hostellerProfile.user.email}]],contact: [[${hostellerProfile.user.mobile}]]};
+        </script>
+        <script th:inline="javascript" th:if="${#lists.contains(loginInfoRoles, 1) or #lists.contains(loginInfoRoles, 2)}">
+            var userProfile = {name: [[${loginInfo.name}]], email: [[${loginInfo.email}]],contact: [[${loginInfo.mobile}]]};
         </script>
         <script src="js/custom/payment.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

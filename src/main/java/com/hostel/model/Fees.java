@@ -1,14 +1,15 @@
 package com.hostel.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.Getter;
 
 @Entity
 @AllArgsConstructor
@@ -17,6 +18,8 @@ import lombok.Getter;
 @Setter
 public class Fees {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long feesModelId;
     private String paymentId;
     private String paymentType;
     private String paymentDateAndTime;

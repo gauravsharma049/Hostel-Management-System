@@ -1,12 +1,8 @@
 package com.hostel.controller.chiefWarden;
 
-import com.hostel.model.Hostel;
-import com.hostel.model.HostelFeesDetails;
-import com.hostel.model.User;
-import com.hostel.model.Warden;
-import com.hostel.service.HostelService;
-import com.hostel.service.WardenService;
-import com.hostel.service.impl.HostelFeesServiceImpl;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,8 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import com.hostel.model.Hostel;
+import com.hostel.model.HostelFeesDetails;
+import com.hostel.model.User;
+import com.hostel.model.Warden;
+import com.hostel.service.HostelFeesService;
+import com.hostel.service.HostelService;
+import com.hostel.service.WardenService;
 
 @Controller
 @RequestMapping("/warden_c")
@@ -30,7 +31,8 @@ public class WardenController {
 
     @Autowired
     private HostelService hostelService;
-    @Autowired HostelFeesServiceImpl hostelFeesService;
+    @Autowired
+    HostelFeesService hostelFeesService;
 
     @GetMapping("/indexWarden")
     public String warden(Model model){

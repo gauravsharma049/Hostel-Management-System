@@ -3,12 +3,13 @@ package com.hostel.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hostel.service.HostelFeesService;
+import com.hostel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hostel.dto.HostellerDetailsDto;
-import com.hostel.dto.UserDto;
 import com.hostel.model.HostellerDetails;
 import com.hostel.model.Role;
 import com.hostel.model.User;
@@ -18,9 +19,11 @@ import com.hostel.service.HostellerDetailsService;
 
 @Service
 public class HostellerDetailsServiceImpl implements HostellerDetailsService{
-    @Autowired UserServiceImpl userService;
+    @Autowired
+    UserService userService;
     @Autowired HostellerDetailsRepository hostellerDetailsRepository;
-    @Autowired HostelFeesServiceImpl hostelFeesService;
+    @Autowired
+    HostelFeesService hostelFeesService;
     @Autowired RoleRepository roleRepository;
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
@@ -171,6 +174,7 @@ public class HostellerDetailsServiceImpl implements HostellerDetailsService{
         hostellerDetailsRepository.deleteById(id);
     }
 
+    @Override
     public HostellerDetails findByUserId(int id){
         return hostellerDetailsRepository.findByUserUserId(id);
     }

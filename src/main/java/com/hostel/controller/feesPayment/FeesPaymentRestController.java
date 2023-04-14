@@ -11,24 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hostel.dto.FeesPaymentDto;
 import com.hostel.model.HostelFeesDetails;
-import com.hostel.model.HostellerDetails;
-import com.hostel.service.impl.FeesPaymentServiceImpl;
-import com.hostel.service.impl.HostelFeesServiceImpl;
-import com.hostel.service.impl.HostellerDetailsServiceImpl;
-import com.hostel.service.impl.UserServiceImpl;
+import com.hostel.service.FeesPaymentService;
+import com.hostel.service.HostelFeesService;
+import com.hostel.service.HostellerDetailsService;
+import com.hostel.service.UserService;
 
 @RestController
 @RequestMapping("/fees")
 public class FeesPaymentRestController {
     
-    @Autowired FeesPaymentServiceImpl feesPaymentService;
-    @Autowired HostelFeesServiceImpl hostelFeesService;
-    @Autowired UserServiceImpl userService;
-    @Autowired HostellerDetailsServiceImpl hostellerService;
+    @Autowired
+    FeesPaymentService feesPaymentService;
+    @Autowired
+    HostelFeesService hostelFeesService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    HostellerDetailsService hostellerService;
 
     @PostMapping("/payFees")
     public String payFees(@RequestBody FeesPaymentDto feesPaymentDto) {
-        feesPaymentService.payFees(feesPaymentDto.getAmount(), feesPaymentDto.getHostellerId());
+        feesPaymentService.payFees(feesPaymentDto);
         return "Fees paid successfully";
     }
 
@@ -47,4 +50,5 @@ public class FeesPaymentRestController {
     public void deleteUser(@PathVariable("id") int id){
         hostellerService.delete(id);
     }
+
 }

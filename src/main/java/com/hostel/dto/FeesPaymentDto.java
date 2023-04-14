@@ -12,4 +12,6 @@ import lombok.Setter;
 public class FeesPaymentDto {
     private double amount;
     private int hostellerId;
+    private boolean paymentStatus;
+    private String paymentId;
 }

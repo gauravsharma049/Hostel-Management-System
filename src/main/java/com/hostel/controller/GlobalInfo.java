@@ -12,13 +12,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import com.hostel.dto.UserDto;
 import com.hostel.model.HostellerDetails;
 import com.hostel.model.Role;
-import com.hostel.service.impl.HostellerDetailsServiceImpl;
-import com.hostel.service.impl.UserServiceImpl;
+import com.hostel.service.HostellerDetailsService;
+import com.hostel.service.UserService;
 
 @ControllerAdvice
 public class GlobalInfo {
-    @Autowired UserServiceImpl userService;
-    @Autowired HostellerDetailsServiceImpl hostellerDetailsService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    HostellerDetailsService hostellerDetailsService;
 
 
     @ModelAttribute("loginInfo")

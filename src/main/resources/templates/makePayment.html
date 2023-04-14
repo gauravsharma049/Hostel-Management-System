@@ -9,6 +9,7 @@
 </head>
 <body>
     <div class="content">
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         <!-- Content Row -->
         <div class="row">
             <!-- Begin Page Content -->
@@ -71,18 +72,18 @@
                                         <div class="col-md-4">
                                             <label class="control-label" for="name">Amount to pay</label>
                                             <input id="amount" name="amount" class="form-control input-md"
-                                            type="text"  th:value="${#lists.contains(loginInfoRoles, 4)} ? ${hostellerProfile.dueFeesAmount} : *{amount}">
+                                            type="number"  th:value="${#lists.contains(loginInfoRoles, 4)} ? ${hostellerProfile.dueFeesAmount} : *{amount}">
                                         </div>
                                     </div>
                                 </div>
                                 
-                                
                                 <div class="form-group">
                                     <div class="row text-center">
                                         <div class="col-4">
+                                            <input style="display: none;" th:if="${#lists.contains(loginInfoRoles, 4)}" id="hostellerId" type="number" th:value="${hostellerProfile.hostellerId}">
                                         </div>
                                         <div class="col-4">
-                                            <button type="submit" class="btn btn-block btn-primary">Pay</button>
+                                            <button type="button" onclick="paymentStart()" id="rzp-button" class="btn btn-block btn-primary">Pay</button>
                                         </div>
                                         <div class="col-4">
                                         </div>
@@ -95,6 +96,11 @@
 
             </div>
         </div>
+        <script th:inline="javascript">
+            var userProfile = {name: [[${hostellerProfile.user.name}]], email: [[${hostellerProfile.user.email}]],contact: [[${hostellerProfile.user.mobile}]]};
+        </script>
+        <script src="js/custom/payment.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     </div>
 </body>
 </html>

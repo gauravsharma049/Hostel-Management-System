@@ -19,13 +19,12 @@ import com.hostel.dto.UserDto;
 import com.hostel.helper.Message;
 import com.hostel.model.Role;
 import com.hostel.service.RoleService;
-import com.hostel.service.impl.HostellerDetailsServiceImpl;
-import com.hostel.service.impl.UserServiceImpl;
+import com.hostel.service.UserService;
 
 @Controller
 public class HomeController {
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
     @Autowired private RoleService roleService;
     @GetMapping("/")
     public String home() {

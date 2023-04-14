@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.hostel.dto.HostellerDetailsDto;
-import com.hostel.service.impl.HostellerDetailsServiceImpl;
+import com.hostel.service.HostellerDetailsService;
 
 @Controller
 public class ProfileController {
-    @Autowired HostellerDetailsServiceImpl hostellersService;
+    @Autowired
+    HostellerDetailsService hostellersService;
 
     @GetMapping("/profile")
     public String profile(Model model){

@@ -11,4 +11,6 @@ public interface UserService {
     User update(UserDto userDto);
     List<UserDto> getAllUser();
     void delete(int id);
+
+    UserDto findByEmail(String name);
 }

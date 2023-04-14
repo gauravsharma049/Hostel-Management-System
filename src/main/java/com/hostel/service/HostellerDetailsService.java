@@ -11,4 +11,6 @@ public interface HostellerDetailsService {
     HostellerDetails findById(int id);
     List<HostellerDetailsDto> findAllHostellerDetails();
     void delete(int id);
+
+    HostellerDetails findByUserId(int userId);
 }

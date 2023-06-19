@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,6 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
     @Override
     public User save(UserDto userDto) {
             User user = new User();
@@ -70,6 +70,11 @@ public class UserServiceImpl implements UserService {
         userDto.setEmail(user.getEmail());
         userDto.setRoles(user.getRoles());
         return userDto;
+    }
+
+    @Override
+    public UserDto getLoggedInUser(Principal principal){
+        return findByEmail(principal.getName());
     }
 
 }

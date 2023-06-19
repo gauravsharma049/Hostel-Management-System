@@ -3,6 +3,7 @@ package com.hostel.service;
 import com.hostel.dto.UserDto;
 import com.hostel.model.User;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserService {
@@ -13,4 +14,6 @@ public interface UserService {
     void delete(int id);
 
     UserDto findByEmail(String name);
+
+    UserDto getLoggedInUser(Principal principal);
 }

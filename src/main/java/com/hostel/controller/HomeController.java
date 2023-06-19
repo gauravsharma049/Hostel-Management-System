@@ -1,11 +1,14 @@
 package com.hostel.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import com.hostel.dto.ResetPasswordDto;
+import com.hostel.service.PasswordChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
@@ -26,6 +29,7 @@ public class HomeController {
     @Autowired
     private UserService userService;
     @Autowired private RoleService roleService;
+    @Autowired private PasswordChange passwordService;
     @GetMapping("/")
     public String home() {
         return "dashboard";
@@ -51,7 +55,16 @@ public class HomeController {
     public String forgotPassword(){
         return "forgot-password";
     }
-
+    @GetMapping("/change-password")
+    public String resetPassword(Model model){
+        model.addAttribute("passwords", new ResetPasswordDto());
+        return "reset-password";
+    }
+    @PostMapping("/change-password")
+    public String passwordChanged(Principal principal, @ModelAttribute("passwords") ResetPasswordDto passwordDto){
+        passwordService.resetPassword(userService.getLoggedInUser(principal).getUserId(), passwordDto.getOldPassword(), passwordDto.getNewPassword());
+        return "reset-password";
+    }
     @PostMapping("/register")
     public String SignUp(@Valid @ModelAttribute("user") UserDto userDto,
                          BindingResult bindingResult,
